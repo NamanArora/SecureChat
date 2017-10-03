@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, Text, KeyboardAvoidingView, Button, View } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
+import RoundedButton from '../Components/RoundedButton';
 
 // Styles
 import styles from './Styles/LoginScreenStyle'
@@ -12,7 +13,10 @@ class LoginScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Text>LoginScreen</Text>
+          <View>
+          <Text style={styles.titleText}>SecureChat</Text>
+          <RoundedButton text="rounded button" onPress={()=>{}} />  
+          </View>
         </KeyboardAvoidingView>
       </ScrollView>
     )
