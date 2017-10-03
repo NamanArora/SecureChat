@@ -11,9 +11,14 @@ import styles from './Styles/LoginScreenStyle'
 
 class LoginScreen extends Component {
 
+  _addQR = () =>{
 
+  }
 
-  
+  _existing = () =>{
+    
+  }
+
   render () {
     return (
       <ScrollView style={[styles.container, styles.scroll]}>
