@@ -4,8 +4,13 @@ import Colors from '../../Themes/Colors'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   heading:{
-    fontSize: 25,
-    color: Colors.text
+    fontSize: 30,
+    color: '#FFF'
 
+  },
+  logo:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

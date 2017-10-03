@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import RoundedButton from '../Components/RoundedButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Styles
 import styles from './Styles/LoginScreenStyle'
@@ -13,8 +14,12 @@ class LoginScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <View>
-          <Text style={styles.titleText}>SecureChat</Text>
+          <View >
+            <View style={styles.logo}>
+            <Icon name="fingerprint" size={100} color="#FFF" />
+            <Text style={styles.heading}>SecureChat</Text>
+            </View>
+          
           <RoundedButton text="rounded button" onPress={()=>{}} />  
           </View>
         </KeyboardAvoidingView>
