@@ -10,7 +10,20 @@ export default StyleSheet.create({
   },
   logo:{
     flex: 1,
+    marginTop: 100,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  buttons:{
+    marginTop: 20,
+  },
+  footer:{
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:180,
+  },
+  scroll:{
+    
   }
 })

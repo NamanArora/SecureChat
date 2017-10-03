@@ -10,17 +10,27 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './Styles/LoginScreenStyle'
 
 class LoginScreen extends Component {
+
+
+
+  
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container, styles.scroll]}>
         <KeyboardAvoidingView behavior='position'>
           <View >
             <View style={styles.logo}>
             <Icon name="fingerprint" size={100} color="#FFF" />
             <Text style={styles.heading}>SecureChat</Text>
+            <Text style={styles.subtitle}>A Super secure messaging app</Text>
             </View>
-          
-          <RoundedButton text="rounded button" onPress={()=>{}} />  
+          <View style={styles.buttons}>
+          <RoundedButton text="add new qr code" onPress={this._addQR.bind(this)} /> 
+          <RoundedButton text="existing chats" onPress={this._existing.bind(this)} />  
+          </View>
+          <View style={styles.footer} >
+          <Text style={styles.subtitle}>App made using React Native</Text>
+          </View>
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
