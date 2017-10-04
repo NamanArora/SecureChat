@@ -19,9 +19,7 @@ class Chats extends React.PureComponent {
       {title: 'Second Title', description: 'Second Description'},
       {title: 'Third Title', description: 'Third Description'},
       {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'}
+      
     ]
   }
 
@@ -60,7 +58,12 @@ class Chats extends React.PureComponent {
     <Text style={styles.label}> - Nothing to See Here - </Text>
 
   renderSeparator = () =>
-    <Text style={styles.label}> - ~~~~~ - </Text>
+  <View
+  style={{
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  }}
+/>
 
   // The default function if no Key is provided is index
   // an identifiable key is important if you plan on
@@ -93,8 +96,6 @@ class Chats extends React.PureComponent {
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
           ListEmptyComponent={this.renderEmpty}
           ItemSeparatorComponent={this.renderSeparator}
         />

@@ -9,22 +9,27 @@ export default StyleSheet.create({
   },
   row: {
     flex: 1,
-    backgroundColor: Colors.fire,
-    marginVertical: Metrics.smallMargin,
+    backgroundColor: Colors.peter,
+    marginVertical: 0,
+    paddingVertical: 10,
     justifyContent: 'center'
   },
   boldLabel: {
     fontWeight: 'bold',
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     color: Colors.snow,
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: Metrics.smallMargin
   },
   label: {
-    textAlign: 'center',
+    textAlign: 'left',
     color: Colors.snow
   },
   listContent: {
-    marginTop: Metrics.baseMargin
+    marginTop: 0
+  },
+  chatbox:{
+    backgroundColor: "#FFF",
+    margin: 10,
   }
 })
