@@ -34,7 +34,7 @@ class LoginScreen extends Component {
           <RoundedButton text="existing chats" onPress={this._existing.bind(this)} />  
           </View>
           <View style={styles.footer} >
-          <Text style={styles.subtitle}>App made using React Native</Text>
+          <Text style={styles.bottomLiner}>App made using React Native</Text>
           </View>
           </View>
         </KeyboardAvoidingView>

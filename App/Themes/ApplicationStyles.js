@@ -40,6 +40,12 @@ const ApplicationStyles = {
       marginBottom: Metrics.smallMargin,
       marginHorizontal: Metrics.smallMargin
     },
+    bottomLiner: {
+      color: Colors.cherry,
+      padding: Metrics.smallMargin,
+      marginBottom: Metrics.smallMargin,
+      marginHorizontal: Metrics.smallMargin
+    },
     titleText: {
       ...Fonts.style.h2,
       fontSize: 14,
