@@ -5,13 +5,14 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.coal
+    backgroundColor: Colors.background
   },
   row: {
     flex: 1,
-    backgroundColor: Colors.coal,
+    backgroundColor: Colors.background,
     marginVertical: 0,
     paddingVertical: 10,
+    paddingHorizontal: 5,
     justifyContent: 'center'
   },
   boldLabel: {
