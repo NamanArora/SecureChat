@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button, View } from 'react-native'
+import { ScrollView, Text, KeyboardAvoidingView, Button, View, Alert } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -12,11 +12,11 @@ import styles from './Styles/LoginScreenStyle'
 class LoginScreen extends Component {
 
   _addQR = () =>{
-
+    this.props.navigation.navigate('QRcodeScreen');
   }
 
   _existing = () =>{
-    
+    this.props.navigation.navigate('ExistingChatsScreen');
   }
 
   render () {
