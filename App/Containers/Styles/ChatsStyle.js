@@ -5,11 +5,11 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.background
+    backgroundColor: Colors.coal
   },
   row: {
     flex: 1,
-    backgroundColor: Colors.peter,
+    backgroundColor: Colors.coal,
     marginVertical: 0,
     paddingVertical: 10,
     justifyContent: 'center'

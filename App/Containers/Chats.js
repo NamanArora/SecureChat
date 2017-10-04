@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList,TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
@@ -33,10 +33,12 @@ class Chats extends React.PureComponent {
   *************************************************************/
   renderRow ({item}) {
     return (
+      <TouchableOpacity>
       <View style={styles.row}>
         <Text style={styles.boldLabel}>{item.title}</Text>
         <Text style={styles.label}>{item.description}</Text>
       </View>
+      </TouchableOpacity>
     )
   }
 
