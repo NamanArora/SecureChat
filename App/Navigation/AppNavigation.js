@@ -1,4 +1,5 @@
 import { StackNavigator, TabNavigator } from 'react-navigation'
+import ChatScreen from '../Containers/ChatScreen'
 import Chats from '../Containers/Chats'
 import Contacts from '../Containers/Contacts'
 
@@ -12,6 +13,7 @@ import styles from './Styles/NavigationStyles'
 
 
 const PrimaryNav = StackNavigator({
+  ChatScreen: { screen: ChatScreen },
   QRcodeScreen: { screen: QRcodeScreen },
   LoginScreen: { screen: LoginScreen },
   LaunchScreen: { screen: LaunchScreen },

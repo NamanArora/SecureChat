@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text, FlatList,TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/ChatsStyle'
 
-class Chats extends React.PureComponent {
+class Chats extends Component {
   /* ***********************************************************
   * STEP 1
   * This is an array of objects with the properties you desire
@@ -23,6 +23,8 @@ class Chats extends React.PureComponent {
     ]
   }
 
+  
+
   /* ***********************************************************
   * STEP 2
   * `renderRow` function. How each cell/row should be rendered
@@ -32,8 +34,13 @@ class Chats extends React.PureComponent {
     return <MyCustomCell title={item.title} description={item.description} />
   *************************************************************/
   renderRow ({item}) {
+    openChat = () =>{
+      const { navigation } = this.props;
+      navigation.navigate('ChatScreen');
+    }
+
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={this.openChat.bind(this)}>
       <View style={styles.row}>
         <Text style={styles.boldLabel}>{item.title}</Text>
         <Text style={styles.label}>{item.description}</Text>
