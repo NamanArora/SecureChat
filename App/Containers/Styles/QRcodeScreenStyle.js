@@ -4,7 +4,7 @@ import { ApplicationStyles } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   centerText: {
-    flex: 1,
+    flex:1,
     fontSize: 18,
     paddingVertical:15,
     paddingHorizontal:20,
@@ -24,4 +24,10 @@ export default StyleSheet.create({
   buttonTouchable: {
     padding: 16,
 },
+fake:{
+  flex: 1,
+  height:100,
+  width: 500,
+  backgroundColor: '#34495e'
+}
 })

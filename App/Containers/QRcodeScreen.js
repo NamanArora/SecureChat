@@ -21,16 +21,15 @@ class QRcodeScreen extends Component {
         onRead={this.onSuccess.bind(this)}
         reactivate={true}
         topContent={(
+          <View style={styles.fake}>
+          </View>
+        )}
+        bottomContent={(
           <View style={styles.container}>
           <Text style={styles.centerText}>
             Scan the QR code you would like to connect to.
           </Text>
-          </View>
-        )}
-        bottomContent={(
-          <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}>OK. Got it!</Text>
-          </TouchableOpacity>
+            </View>
         )}
 />
     )
