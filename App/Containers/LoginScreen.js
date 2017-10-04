@@ -21,7 +21,7 @@ class LoginScreen extends Component {
 
   render () {
     return (
-      <ScrollView style={[styles.container, styles.scroll]}>
+      <View style={[styles.container, styles.scroll]}>
         <KeyboardAvoidingView behavior='position'>
           <View >
             <View style={styles.logo}>
@@ -38,7 +38,7 @@ class LoginScreen extends Component {
           </View>
           </View>
         </KeyboardAvoidingView>
-      </ScrollView>
+      </View>
     )
   }
 }
