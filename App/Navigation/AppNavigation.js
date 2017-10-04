@@ -1,4 +1,6 @@
 import { StackNavigator, TabNavigator } from 'react-navigation'
+import Chats from '../Containers/Chats'
+import Contacts from '../Containers/Contacts'
 
 import QRcodeScreen from '../Containers/QRcodeScreen'
 import LoginScreen from '../Containers/LoginScreen'
