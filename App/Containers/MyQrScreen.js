@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, TextInput, View, Button } from 'react-native'
+import { ScrollView, Text, KeyboardAvoidingView, TextInput, View, Button, Console, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -12,11 +12,40 @@ class MyQrScreen extends Component {
     super(props);
     this.state = {
       firstTime: true,
-      username: ''
+      username: '',
+      text: ''
     }
   }
 
+  componentWillMount() {
+    this.load()
+  }
+
+  load = async () => {
+    try {
+      const name = await AsyncStorage.getItem("username")
+
+      if (name !== null) {
+        this.setState({username: name});
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  save = async (name) => {
+    try {
+      await AsyncStorage.setItem("username", name)
+
+      this.setState({username: name})
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+
   _generateQR =() =>{
+    this.save(this.state.text);
 
   }
 
@@ -28,8 +57,8 @@ class MyQrScreen extends Component {
           <View style={styles.centerView}>
             <View style={{marginTop: 50}}>
               
-          <TextInput editable={false}  width={300} placeholderTextColor={'white'} multiline={false} style={{color:'white'}} placeholder="Enter your username" onChangeText={(text) => this.setState({username: text})} />
-          {<Button title="Save" onPress={this._generateQR.bind(this)} />}
+          <TextInput editable={this.state.username === ''? true: false} value={this.state.username !== ''? this.state.username: ''} width={300} placeholderTextColor={'white'} multiline={false} style={{color:'white'}} placeholder="Enter your username" onChangeText={(text1) => this.setState({text: text1})} />
+          {this.state.username === '' ? <Button title="Save" onPress={this._generateQR.bind(this)} />: <View />}
           </View>
           {this.state.username!== '' ? <View style={{marginTop: 0}}><QRCode size={300} value={this.state.username} /></View>: <View /> }
           </View>
