@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button, View, Alert } from 'react-native'
+import { ScrollView, Text, KeyboardAvoidingView, Button, View, Alert, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -15,6 +15,10 @@ class LoginScreen extends Component {
     this.props.navigation.navigate('QRcodeScreen');
   }
 
+  _myQR = ()=>{
+    this.props.navigation.navigate('MyQrScreen');
+  }
+
   _existing = () =>{
     this.props.navigation.navigate('ExistingChatsScreen');
   }
@@ -25,8 +29,14 @@ class LoginScreen extends Component {
         <KeyboardAvoidingView behavior='position'>
           <View >
             <View style={styles.logo}>
+            <TouchableOpacity style={{ height: 100, width: 100,}} onPress={this._myQR.bind(this)}>
+              <View>
             <Icon name="fingerprint" size={100} color="#FFF" />
+            </View>
+            </TouchableOpacity>
+            
             <Text style={styles.heading}>SecureChat</Text>
+           
             <Text style={styles.subtitle}>A Super secure messaging app</Text>
             </View>
           <View style={styles.buttons}>
