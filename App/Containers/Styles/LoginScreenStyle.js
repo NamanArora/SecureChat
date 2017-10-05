@@ -8,12 +8,6 @@ export default StyleSheet.create({
     color: '#FFF'
 
   },
-  logo:{
-    flex: 1,
-    marginTop: 180,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   buttons:{
     marginTop: 100,
   },

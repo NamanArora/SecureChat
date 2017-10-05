@@ -11,6 +11,16 @@ const ApplicationStyles = {
       flex: 1,
       backgroundColor: Colors.transparent
     },
+    logo:{
+      flex: 1,
+      marginTop: 180,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    centerView:{
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
     backgroundImage: {
       position: 'absolute',
       top: 0,
