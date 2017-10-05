@@ -19,11 +19,11 @@ class Chats extends Component {
       {title: 'Second Title', description: 'Second Description'},
       {title: 'Third Title', description: 'Third Description'},
       {title: 'Fourth Title', description: 'Fourth Description'},
-      
+
     ]
   }
 
-  
+
 
   /* ***********************************************************
   * STEP 2
@@ -34,11 +34,6 @@ class Chats extends Component {
     return <MyCustomCell title={item.title} description={item.description} />
   *************************************************************/
   renderRow ({item}) {
-    openChat = () =>{
-      const { navigation } = this.props;
-      navigation.navigate('ChatScreen');
-    }
-
     return (
       <TouchableOpacity onPress={this.openChat.bind(this)}>
       <View style={styles.row}>
@@ -47,6 +42,11 @@ class Chats extends Component {
       </View>
       </TouchableOpacity>
     )
+  }
+
+  openChat = () =>{
+    const { navigation } = this.props;
+    navigation.navigate('ChatScreen');
   }
 
   /* ***********************************************************
@@ -102,7 +102,7 @@ class Chats extends Component {
         <FlatList
           contentContainerStyle={styles.listContent}
           data={this.state.dataObjects}
-          renderItem={this.renderRow}
+          renderItem={this.renderRow.bind(this)}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
           ListEmptyComponent={this.renderEmpty}
