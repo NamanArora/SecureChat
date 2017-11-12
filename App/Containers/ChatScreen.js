@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import * as firebase from 'firebase'
+import CryptoJS from 'crypto-js'
 
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
 const firebaseConfig = {
@@ -20,12 +21,31 @@ class ChatScreen extends React.PureComponent {
 
   constructor(props){
     super(props)
-    this.itemRef = this.getRef().child('items')
-
+    this.itemRef = this.getRef()
   }
 
   getRef = ()=>{
-    return firebaseApp.database().ref()
+    return firebaseApp.database()
+  }
+
+  componentWillMount(){
+    this.writeData()
+  }
+
+  sendChat = () =>{
+    
+  }
+
+  writeData = () =>{
+    let encrypted = CryptoJS.AES.encrypt('hi my name is naman','key')
+
+    this.itemRef.ref('yolo/naman').set(
+      {
+        name: "naman",
+        sex: "male",
+        message: encrypted.toString()
+      }
+    )
   }
 
   /* ***********************************************************
