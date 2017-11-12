@@ -1,13 +1,33 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
+import * as firebase from 'firebase'
 
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
+const firebaseConfig = {
+  apiKey: "AIzaSyDG_UuKc3pDG0Z3vLKrpTEQN8Z2AaauY9M",
+  authDomain: "chat-fd5fc.firebaseapp.com",
+  databaseURL: "https://chat-fd5fc.firebaseio.com",
+  projectId: "chat-fd5fc",
+  storageBucket: "chat-fd5fc.appspot.com",
+}
+const firebaseApp = firebase.initializeApp(firebaseConfig)
 
 // Styles
 import styles from './Styles/ChatScreenStyle'
 
 class ChatScreen extends React.PureComponent {
+
+  constructor(props){
+    super(props)
+    this.itemRef = this.getRef().child('items')
+
+  }
+
+  getRef = ()=>{
+    return firebaseApp.database().ref()
+  }
+
   /* ***********************************************************
   * STEP 1
   * This is an array of objects with the properties you desire
