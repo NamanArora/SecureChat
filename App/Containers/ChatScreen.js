@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import * as firebase from 'firebase'
 import CryptoJS from 'crypto-js'
 import MessageBox from '../Components/MessageBox'
+import { ApplicationStyles, Metrics, Colors } from '../Themes'
 
-// More info here: https://facebook.github.io/react-native/docs/flatlist.html
+// More info here: https://facebostylesok.github.io/react-native/docs/flatlist.html
 const firebaseConfig = {
   apiKey: "AIzaSyDG_UuKc3pDG0Z3vLKrpTEQN8Z2AaauY9M",
   authDomain: "chat-fd5fc.firebaseapp.com",
@@ -36,6 +37,20 @@ class ChatScreen extends React.PureComponent {
     return firebaseApp.database()
   }
 
+  componentWillMount(){
+    this.receiveChat()
+  }
+
+  receiveChat = ()=>{
+    let ref = this.itemRef.ref(this.state.username+this.state.friend )
+    ref.on("value",(snapshot) =>{
+      console.log(snapshot.val())
+    },(error)=>{
+      console.log(error.code)
+    })
+
+  }
+
   
   sendChat = () =>{
     console.log("enter")
@@ -48,9 +63,11 @@ class ChatScreen extends React.PureComponent {
   }
 
   writeData = (m) =>{
+    let timeStamp = Math.floor(Date.now() / 1000)
     this.itemRef.ref(this.state.username+this.state.friend + '/'+5678 ).set(
       {
         name: this.state.username,
+        time: timeStamp,
         message: m
       }
     )
@@ -110,7 +127,7 @@ class ChatScreen extends React.PureComponent {
   render () {
     console.log("refresh")
     return (
-      <View style={styles.container}>
+      <View style={styles.h}>
         <FlatList
           contentContainerStyle={styles.listContent}
           data={this.state.dataObjects}
@@ -123,11 +140,12 @@ class ChatScreen extends React.PureComponent {
           ItemSeparatorComponent={this.renderSeparator}
         />
       <TextInput
+        style={{flex: 5,width:250}}
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         onChangeText={(text) => this.setState({text})}
         value={this.state.text}
       />
-      <Button onPress={this.sendChat.bind(this)} title="Send" color="#841584" />
+      <Button onPress={this.sendChat.bind(this)} title="Send" color={Colors.peter} />
       </View>
     )
   }
