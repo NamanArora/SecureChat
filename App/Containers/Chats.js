@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList,TouchableOpacity } from 'react-native'
+import { View, Text, FlatList,TouchableOpacity, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
@@ -8,20 +8,46 @@ import { connect } from 'react-redux'
 import styles from './Styles/ChatsStyle'
 
 class Chats extends Component {
+
+  
+  constructor(props){
+    super(props)
+    this.state = {
+      username: ''
+    }
+  }
+
+  load = async () => {
+    try {
+      const name = await AsyncStorage.getItem("username")
+
+      if (name !== null) {
+        this.setState({username: name});
+        console.log("Setting user to "+ name)
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  componentWillMount(){
+    this.load()
+  }
+
+
   /* ***********************************************************
   * STEP 1
   * This is an array of objects with the properties you desire
   * Usually this should come from Redux mapStateToProps
   *************************************************************/
-  state = {
-    dataObjects: [
+    dataObjects= [
       {title: 'George', description: 'First Description'},
       {title: 'Michael', description: 'Second Description'},
       {title: 'Jennifer', description: 'Third Description'},
       {title: 'Pilla', description: 'Fourth Description'},
 
     ]
-  }
+  
 
 
 
@@ -35,7 +61,7 @@ class Chats extends Component {
   *************************************************************/
   renderRow ({item}) {
     return (
-      <TouchableOpacity onPress={this.openChat.bind(this)}>
+      <TouchableOpacity onPress={this.openChat.bind(this, item.title)}>
       <View style={styles.row}>
         <Text style={styles.boldLabel}>{item.title}</Text>
         <Text style={styles.label}>{item.description}</Text>
@@ -44,9 +70,10 @@ class Chats extends Component {
     )
   }
 
-  openChat = () =>{
+  openChat = (f) =>{
+    //console.log("Opening chat from " + this.state.username + " to " + f)
     const { navigation } = this.props;
-    navigation.navigate('ChatScreen', {name: "Bunty"});
+    navigation.navigate('ChatScreen', {user: this.state.username, friend: f});
   }
 
   /* ***********************************************************
@@ -101,7 +128,7 @@ class Chats extends Component {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={styles.listContent}
-          data={this.state.dataObjects}
+          data={this.dataObjects}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
