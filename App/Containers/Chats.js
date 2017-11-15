@@ -15,10 +15,10 @@ class Chats extends Component {
   *************************************************************/
   state = {
     dataObjects: [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
+      {title: 'George', description: 'First Description'},
+      {title: 'Michael', description: 'Second Description'},
+      {title: 'Jennifer', description: 'Third Description'},
+      {title: 'Pilla', description: 'Fourth Description'},
 
     ]
   }
@@ -46,7 +46,7 @@ class Chats extends Component {
 
   openChat = () =>{
     const { navigation } = this.props;
-    navigation.navigate('ChatScreen');
+    navigation.navigate('ChatScreen', {name: "Bunty"});
   }
 
   /* ***********************************************************

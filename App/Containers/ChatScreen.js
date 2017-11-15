@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import * as firebase from 'firebase'
 import CryptoJS from 'crypto-js'
@@ -22,14 +22,41 @@ class ChatScreen extends React.PureComponent {
   constructor(props){
     super(props)
     this.itemRef = this.getRef()
+    this.state= {
+      username: '',
+      friend: ''
+    }
+  }
+
+  load = async () => {
+    try {
+      const name = await AsyncStorage.getItem("username")
+
+      if (name !== null) {
+        this.setState({username: name});
+      }
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   getRef = ()=>{
     return firebaseApp.database()
   }
 
-  componentWillMount(){
+  componentDidMount(){
+    this.getUsernameAndFriend()
     this.writeData()
+  }
+
+  getUsernameAndFriend =() =>{
+    this.load()
+    const {state} = this.props.navigation;
+    let t =state.params.name
+    this.setState({
+      friend: this.t
+    })
+    console.log('' + this.state.friend + t)
   }
 
   sendChat = () =>{
@@ -38,8 +65,7 @@ class ChatScreen extends React.PureComponent {
 
   writeData = () =>{
     let encrypted = CryptoJS.AES.encrypt('hi my name is naman','key')
-
-    this.itemRef.ref('yolo/naman').set(
+    this.itemRef.ref(this.state.username+this.state.friend + '/'+1234 ).set(
       {
         name: "naman",
         sex: "male",
@@ -125,6 +151,7 @@ class ChatScreen extends React.PureComponent {
   // )}
 
   render () {
+    console.log("refresh")
     return (
       <View style={styles.container}>
         <FlatList
