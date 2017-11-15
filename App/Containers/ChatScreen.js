@@ -22,10 +22,12 @@ class ChatScreen extends React.PureComponent {
   constructor(props){
     super(props)
     this.itemRef = this.getRef()
+    const {state} = props.navigation;
     this.state= {
-      username: '',
-      friend: ''
+      username: state.params.user,
+      friend: state.params.friend
     }
+    console.log("Opening chat from " + this.state.username + " to " + this.state.friend)
   }
 
   load = async () => {
@@ -44,21 +46,7 @@ class ChatScreen extends React.PureComponent {
     return firebaseApp.database()
   }
 
-  componentDidMount(){
-    this.getUsernameAndFriend()
-    this.writeData()
-  }
-
-  getUsernameAndFriend =() =>{
-    this.load()
-    const {state} = this.props.navigation;
-    let t =state.params.name
-    this.setState({
-      friend: this.t
-    })
-    console.log('' + this.state.friend + t)
-  }
-
+  
   sendChat = () =>{
     
   }
