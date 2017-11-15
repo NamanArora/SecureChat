@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Text, FlatList, AsyncStorage } from 'react-native'
+import { View, Text, FlatList, AsyncStorage, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
 import * as firebase from 'firebase'
 import CryptoJS from 'crypto-js'
+import MessageBox from '../Components/MessageBox'
 
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
 const firebaseConfig = {
@@ -25,21 +26,10 @@ class ChatScreen extends React.PureComponent {
     const {state} = props.navigation;
     this.state= {
       username: state.params.user,
-      friend: state.params.friend
+      friend: state.params.friend,
+      text: 'Placeholder'
     }
     console.log("Opening chat from " + this.state.username + " to " + this.state.friend)
-  }
-
-  load = async () => {
-    try {
-      const name = await AsyncStorage.getItem("username")
-
-      if (name !== null) {
-        this.setState({username: name});
-      }
-    } catch (e) {
-      console.error(e)
-    }
   }
 
   getRef = ()=>{
@@ -48,45 +38,24 @@ class ChatScreen extends React.PureComponent {
 
   
   sendChat = () =>{
-    
+    console.log("enter")
+    let message = this.state.text
+    let encrypted = CryptoJS.AES.encrypt(message,'key').toString()
+    this.writeData(encrypted)
+    this.setState({
+      text: ''
+    })
   }
 
-  writeData = () =>{
-    let encrypted = CryptoJS.AES.encrypt('hi my name is naman','key')
-    this.itemRef.ref(this.state.username+this.state.friend + '/'+1234 ).set(
+  writeData = (m) =>{
+    this.itemRef.ref(this.state.username+this.state.friend + '/'+5678 ).set(
       {
-        name: "naman",
-        sex: "male",
-        message: encrypted.toString()
+        name: this.state.username,
+        message: m
       }
     )
   }
 
-  /* ***********************************************************
-  * STEP 1
-  * This is an array of objects with the properties you desire
-  * Usually this should come from Redux mapStateToProps
-  *************************************************************/
-  state = {
-    dataObjects: [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'}
-    ]
-  }
-
-  /* ***********************************************************
-  * STEP 2
-  * `renderRow` function. How each cell/row should be rendered
-  * It's our best practice to place a single component here:
-  *
-  * e.g.
-    return <MyCustomCell title={item.title} description={item.description} />
-  *************************************************************/
   renderRow ({item}) {
     return (
       <View style={styles.row}>
@@ -153,6 +122,12 @@ class ChatScreen extends React.PureComponent {
           ListEmptyComponent={this.renderEmpty}
           ItemSeparatorComponent={this.renderSeparator}
         />
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text) => this.setState({text})}
+        value={this.state.text}
+      />
+      <Button onPress={this.sendChat.bind(this)} title="Send" color="#841584" />
       </View>
     )
   }
