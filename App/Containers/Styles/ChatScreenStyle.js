@@ -26,5 +26,10 @@ export default StyleSheet.create({
   },
   listContent: {
     marginTop: Metrics.baseMargin
+  },
+  h : {
+    flex:1,
+    flexDirection: 'column',
+    backgroundColor: Colors.background
   }
 })
