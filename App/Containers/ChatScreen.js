@@ -19,7 +19,6 @@ const firebaseApp = firebase.initializeApp(firebaseConfig)
 
 // Styles
 import styles from './Styles/ChatScreenStyle'
-import { forEach } from '../../../../.cache/typescript/2.6/node_modules/@types/async';
 
 class ChatScreen extends React.PureComponent {
 
@@ -43,6 +42,7 @@ class ChatScreen extends React.PureComponent {
   }
 
   componentWillMount(){
+    this.openChat()
     this.receiveChat()
     this.setState({
       messages: [
@@ -63,7 +63,8 @@ class ChatScreen extends React.PureComponent {
   receiveChat = ()=>{
     let ref = this.itemRef.ref(this.state.username+this.state.friend )
     ref.on("value",(snapshot) =>{
-      console.log(snapshot.val())
+      if(snapshot!=null)
+      this.parseData(snapshot.val())
     },(error)=>{
       console.log(error.code)
     })
@@ -74,9 +75,13 @@ class ChatScreen extends React.PureComponent {
     this.closeChat()
   }
 
+  openChat =() =>{
+    if(this.itemRef)
+    this.itemRef.goOnline()
+  }
   closeChat = ()=>{
     if(this.itemRef)
-      this.itemRef.off()
+      this.itemRef.goOffline()
   }
 
   
@@ -90,18 +95,28 @@ class ChatScreen extends React.PureComponent {
     })
   }
 
-  parseData = (objs) =>{
-    objs.forEach((element) => {
-      let t = {
-        _id: element._id,
-        text: element.text,
-        createdAt: Object.keys(element)[0],
-        user: {
-          _id: element.user._id,
-          name: element.user.name,
-        },
-      }
+  parseData = (objs = {}) =>{
+    Object.keys(objs).forEach((key) =>{
+      console.log(key)
     })
+    // this.setState({messages : []})
+    // if(objs!=null)
+    // for(element in objs)
+    // {
+    //   console.log(typeof(element))
+    //   let t = {
+    //     _id: element._id,
+    //     text: element.text,
+    //     createdAt: Object.keys(element)[0],
+    //     user: {
+    //       _id: element.user._id,
+    //       name: element.user.name,
+    //     },
+    //   }
+    //   this.setState({
+    //     messages: GiftedChat.append(previousState.messages, t),
+    //   })
+    // }
   }
 
   writeData = (m) =>{
@@ -126,7 +141,7 @@ class ChatScreen extends React.PureComponent {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }));
-
+  
     let t = {
       _id: messages[0]._id,
       text: messages[0].text,
