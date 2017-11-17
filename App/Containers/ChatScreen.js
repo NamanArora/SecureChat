@@ -44,26 +44,14 @@ class ChatScreen extends React.PureComponent {
   componentWillMount(){
     this.openChat()
     this.receiveChat()
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        },
-      ],
-    });
   }
 
   receiveChat = ()=>{
+    
     let ref = this.itemRef.ref(this.state.username+this.state.friend )
     ref.on("value",(snapshot) =>{
-      if(snapshot!=null)
+      console.log("data received")
+      if(snapshot.val())
       this.parseData(snapshot.val())
     },(error)=>{
       console.log(error.code)
@@ -96,27 +84,15 @@ class ChatScreen extends React.PureComponent {
   }
 
   parseData = (objs = {}) =>{
+    
     Object.keys(objs).forEach((key) =>{
-      console.log(key)
+      let obj = objs[key]["message"]
+      this.setState({
+        messages: GiftedChat.append(this.state.messages, obj)
+    }, ()=>{
+      console.log("dataset changed")
     })
-    // this.setState({messages : []})
-    // if(objs!=null)
-    // for(element in objs)
-    // {
-    //   console.log(typeof(element))
-    //   let t = {
-    //     _id: element._id,
-    //     text: element.text,
-    //     createdAt: Object.keys(element)[0],
-    //     user: {
-    //       _id: element.user._id,
-    //       name: element.user.name,
-    //     },
-    //   }
-    //   this.setState({
-    //     messages: GiftedChat.append(previousState.messages, t),
-    //   })
-    // }
+  })
   }
 
   writeData = (m) =>{
