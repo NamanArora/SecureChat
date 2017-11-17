@@ -5,6 +5,7 @@ import * as firebase from 'firebase'
 import CryptoJS from 'crypto-js'
 import MessageBox from '../Components/MessageBox'
 import { ApplicationStyles, Metrics, Colors } from '../Themes'
+import { GiftedChat } from 'react-native-gifted-chat';
 
 // More info here: https://facebostylesok.github.io/react-native/docs/flatlist.html
 const firebaseConfig = {
@@ -18,6 +19,7 @@ const firebaseApp = firebase.initializeApp(firebaseConfig)
 
 // Styles
 import styles from './Styles/ChatScreenStyle'
+import { forEach } from '../../../../.cache/typescript/2.6/node_modules/@types/async';
 
 class ChatScreen extends React.PureComponent {
 
@@ -28,10 +30,13 @@ class ChatScreen extends React.PureComponent {
     this.state= {
       username: state.params.user,
       friend: state.params.friend,
-      text: 'Placeholder'
+      text: 'Placeholder',
+      messages: [],
     }
     console.log("Opening chat from " + this.state.username + " to " + this.state.friend)
   }
+
+
 
   getRef = ()=>{
     return firebaseApp.database()
@@ -39,6 +44,20 @@ class ChatScreen extends React.PureComponent {
 
   componentWillMount(){
     this.receiveChat()
+    this.setState({
+      messages: [
+        {
+          _id: 1,
+          text: 'Hello developer',
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+          },
+        },
+      ],
+    });
   }
 
   receiveChat = ()=>{
@@ -49,6 +68,15 @@ class ChatScreen extends React.PureComponent {
       console.log(error.code)
     })
 
+  }
+
+  componentWillUnmount(){
+    this.closeChat()
+  }
+
+  closeChat = ()=>{
+    if(this.itemRef)
+      this.itemRef.off()
   }
 
   
@@ -62,12 +90,24 @@ class ChatScreen extends React.PureComponent {
     })
   }
 
+  parseData = (objs) =>{
+    objs.forEach((element) => {
+      let t = {
+        _id: element._id,
+        text: element.text,
+        createdAt: Object.keys(element)[0],
+        user: {
+          _id: element.user._id,
+          name: element.user.name,
+        },
+      }
+    })
+  }
+
   writeData = (m) =>{
     let timeStamp = Math.floor(Date.now() / 1000)
-    this.itemRef.ref(this.state.username+this.state.friend + '/'+5678 ).set(
+    this.itemRef.ref(this.state.username+this.state.friend + '/'+m.createdAt ).set(
       {
-        name: this.state.username,
-        time: timeStamp,
         message: m
       }
     )
@@ -82,70 +122,36 @@ class ChatScreen extends React.PureComponent {
     )
   }
 
-  /* ***********************************************************
-  * STEP 3
-  * Consider the configurations we've set below.  Customize them
-  * to your liking!  Each with some friendly advice.
-  *************************************************************/
-  // Render a header?
-  renderHeader = () =>
-    <Text style={[styles.label, styles.sectionHeader]}> - Header - </Text>
+  onSend(messages = []) {
+    this.setState((previousState) => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }));
 
-  // Render a footer?
-  renderFooter = () =>
-    <Text style={[styles.label, styles.sectionHeader]}> - Footer - </Text>
+    let t = {
+      _id: messages[0]._id,
+      text: messages[0].text,
+      createdAt:  messages[0].createdAt,
+      user: {
+        _id: 1,
+        name: this.state.username
+      },
+    }
+    this.writeData(t)
+    //console.log(messages)
+  }
 
-  // Show this when data is empty
-  renderEmpty = () =>
-    <Text style={styles.label}> - Nothing to See Here - </Text>
-
-  renderSeparator = () =>
-    <Text style={styles.label}> - ~~~~~ - </Text>
-
-  // The default function if no Key is provided is index
-  // an identifiable key is important if you plan on
-  // item reordering.  Otherwise index is fine
-  keyExtractor = (item, index) => index
-
-  // How many items should be kept im memory as we scroll?
-  oneScreensWorth = 20
-
-  // extraData is for anything that is not indicated in data
-  // for instance, if you kept "favorites" in `this.state.favs`
-  // pass that in, so changes in favorites will cause a re-render
-  // and your renderItem will have access to change depending on state
-  // e.g. `extraData`={this.state.favs}
-
-  // Optimize your list if the height of each item can be calculated
-  // by supplying a constant height, there is no need to measure each
-  // item after it renders.  This can save significant time for lists
-  // of a size 100+
-  // e.g. itemLayout={(data, index) => (
-  //   {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
-  // )}
 
   render () {
     console.log("refresh")
     return (
-      <View style={styles.h}>
-        <FlatList
-          contentContainerStyle={styles.listContent}
-          data={this.state.dataObjects}
-          renderItem={this.renderRow}
-          keyExtractor={this.keyExtractor}
-          initialNumToRender={this.oneScreensWorth}
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          ListEmptyComponent={this.renderEmpty}
-          ItemSeparatorComponent={this.renderSeparator}
-        />
-      <TextInput
-        style={{flex: 5,width:250}}
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
+      <View style={styles.container}>
+      <GiftedChat
+        messages={this.state.messages}
+        onSend={(messages) => this.onSend(messages)}
+        user={{
+          _id: this.state.username,
+        }}
       />
-      <Button onPress={this.sendChat.bind(this)} title="Send" color={Colors.peter} />
       </View>
     )
   }
