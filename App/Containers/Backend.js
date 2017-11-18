@@ -14,6 +14,7 @@ class Backend {
   }
   // retrieve the messages from the Backend
   loadMessages(callback) {
+    console.log("loading messages")
     this.messagesRef = firebase.database().ref("messages");
     this.messagesRef.off();
     const onReceive = data => {
