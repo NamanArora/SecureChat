@@ -1,4 +1,5 @@
 import firebase from "react-native-firebase";
+import CryptoJS from 'crypto-js';
 
 class Backend {
   uid = "";
@@ -21,7 +22,7 @@ class Backend {
       const message = data.val();
       callback({
         _id: data.key,
-        text: message.text,
+        text: CryptoJS.AES.decrypt(message.text, 'RANDOMKEY').toString(CryptoJS.enc.Utf8),
         createdAt: new Date(message.createdAt),
         user: {
           _id: message.user._id,
@@ -35,7 +36,7 @@ class Backend {
   sendMessage(message) {
     for (let i = 0; i < message.length; i++) {
       this.messagesRef.push({
-        text: message[i].text,
+        text: CryptoJS.AES.encrypt(message[i].text,'RANDOMKEY').toString(),
         user: message[i].user,
         createdAt: firebase.database.ServerValue.TIMESTAMP
       });
