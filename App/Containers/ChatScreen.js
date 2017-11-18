@@ -32,7 +32,6 @@ class ChatScreen extends React.PureComponent {
       text: 'Placeholder',
       messages: [],
     }
-    console.log("Opening chat from " + this.state.username + " to " + this.state.friend)
   }
 
 
@@ -51,8 +50,10 @@ class ChatScreen extends React.PureComponent {
     let ref = this.itemRef.ref(this.state.username+this.state.friend )
     ref.on("value",(snapshot) =>{
       console.log("data received")
-      if(snapshot.val())
-      this.parseData(snapshot.val())
+      if(snapshot.val()){
+        this.parseData(snapshot.val())
+      }
+      
     },(error)=>{
       console.log(error.code)
     })
