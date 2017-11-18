@@ -30,6 +30,16 @@ class Backend {
     };
     this.messagesRef.limitToLast(20).on("child_added", onReceive);
   }
+  // send the message to the Backend
+  sendMessage(message) {
+    for (let i = 0; i < message.length; i++) {
+      this.messagesRef.push({
+        text: message[i].text,
+        user: message[i].user,
+        createdAt: firebase.database.ServerValue.TIMESTAMP
+      });
+    }
+  }
   
 }
 
