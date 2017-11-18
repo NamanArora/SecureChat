@@ -34,8 +34,6 @@ class ChatScreen extends React.PureComponent {
     }
   }
 
-
-
   getRef = ()=>{
     return firebaseApp.database()
   }
@@ -53,35 +51,10 @@ class ChatScreen extends React.PureComponent {
     });
 }
 
-  receiveChat = ()=>{
-    
-    let ref = this.itemRef.ref(this.state.username+this.state.friend )
-    ref.on("value",(snapshot) =>{
-      console.log("data received")
-      if(snapshot.val()){
-        this.parseData(snapshot.val())
-      }
-      
-    },(error)=>{
-      console.log(error.code)
-    })
-
-  }
-
   componentWillUnmount(){
     Backend.closeChat()
   }
 
-  openChat =() =>{
-    if(this.itemRef)
-    this.itemRef.goOnline()
-  }
-  closeChat = ()=>{
-    if(this.itemRef)
-      this.itemRef.goOffline()
-  }
-
-  
   sendChat = () =>{
     console.log("enter")
     let message = this.state.text
@@ -91,56 +64,6 @@ class ChatScreen extends React.PureComponent {
       text: ''
     })
   }
-
-  parseData = (objs = {}) =>{
-    
-    Object.keys(objs).forEach((key) =>{
-      let obj = objs[key]["message"]
-      console.log(obj)
-      this.setState({
-        messages: [...this.state.messages, obj]
-    }, ()=>{
-      console.log(this.state.messages)
-    })
-  })
-  }
-
-  writeData = (m) =>{
-    let timeStamp = Math.floor(Date.now() / 1000)
-    this.itemRef.ref(this.state.username+this.state.friend + '/'+m.createdAt ).set(
-      {
-        message: m
-      }
-    )
-  }
-
-  renderRow ({item}) {
-    return (
-      <View style={styles.row}>
-        <Text style={styles.boldLabel}>{item.title}</Text>
-        <Text style={styles.label}>{item.description}</Text>
-      </View>
-    )
-  }
-
-  onSend(messages = []) {
-    this.setState((previousState) => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }));
-  
-    let t = {
-      _id: messages[0]._id,
-      text: messages[0].text,
-      createdAt:  messages[0].createdAt,
-      user: {
-        _id: Backend.getUid(),
-        name: this.state.username
-      },
-    }
-    this.writeData(t)
-    //console.log(messages)
-  }
-
 
   render () {
     console.log("refresh")
