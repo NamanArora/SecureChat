@@ -6,6 +6,7 @@ import CryptoJS from 'crypto-js'
 import MessageBox from '../Components/MessageBox'
 import { ApplicationStyles, Metrics, Colors } from '../Themes'
 import { GiftedChat } from 'react-native-gifted-chat';
+import Backend from "./Backend";
 
 // More info here: https://facebostylesok.github.io/react-native/docs/flatlist.html
 const firebaseConfig = {
