@@ -87,10 +87,11 @@ class ChatScreen extends React.PureComponent {
     
     Object.keys(objs).forEach((key) =>{
       let obj = objs[key]["message"]
+      console.log(obj)
       this.setState({
-        messages: GiftedChat.append(this.state.messages, obj)
+        messages: [...this.state.messages, obj]
     }, ()=>{
-      console.log("dataset changed")
+      console.log(this.state.messages)
     })
   })
   }
