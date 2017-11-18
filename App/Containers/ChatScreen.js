@@ -1,14 +1,13 @@
 import React from 'react'
 import { View, Text, FlatList, AsyncStorage, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
-import * as firebase from 'firebase'
 import CryptoJS from 'crypto-js'
 import MessageBox from '../Components/MessageBox'
 import { ApplicationStyles, Metrics, Colors } from '../Themes'
 import { GiftedChat } from 'react-native-gifted-chat';
 import Backend from "./Backend";
+import firebase from "react-native-firebase";
 
-// More info here: https://facebostylesok.github.io/react-native/docs/flatlist.html
 const firebaseConfig = {
   apiKey: "AIzaSyDG_UuKc3pDG0Z3vLKrpTEQN8Z2AaauY9M",
   authDomain: "chat-fd5fc.firebaseapp.com",
@@ -70,7 +69,7 @@ class ChatScreen extends React.PureComponent {
   }
 
   componentWillUnmount(){
-    this.closeChat()
+    Backend.closeChat()
   }
 
   openChat =() =>{
