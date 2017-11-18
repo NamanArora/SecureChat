@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, FlatList, AsyncStorage, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
-import CryptoJS from 'crypto-js'
 import MessageBox from '../Components/MessageBox'
 import { ApplicationStyles, Metrics, Colors } from '../Themes'
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -53,16 +52,6 @@ class ChatScreen extends React.PureComponent {
 
   componentWillUnmount(){
     Backend.closeChat()
-  }
-
-  sendChat = () =>{
-    console.log("enter")
-    let message = this.state.text
-    let encrypted = CryptoJS.AES.encrypt(message,'key').toString()
-    this.writeData(encrypted)
-    this.setState({
-      text: ''
-    })
   }
 
   render () {
