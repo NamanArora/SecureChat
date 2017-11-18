@@ -134,7 +134,7 @@ class ChatScreen extends React.PureComponent {
       text: messages[0].text,
       createdAt:  messages[0].createdAt,
       user: {
-        _id: 1,
+        _id: Backend.getUid(),
         name: this.state.username
       },
     }
@@ -149,9 +149,12 @@ class ChatScreen extends React.PureComponent {
       <View style={styles.container}>
       <GiftedChat
         messages={this.state.messages}
-        onSend={(messages) => this.onSend(messages)}
+        onSend={message => {
+          Backend.sendMessage(message);
+        }}
         user={{
-          _id: this.state.username,
+          _id: Backend.getUid(),
+          name: this.state.username
         }}
       />
       </View>
