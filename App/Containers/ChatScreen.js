@@ -42,9 +42,17 @@ class ChatScreen extends React.PureComponent {
   }
 
   componentWillMount(){
-    this.openChat()
-    this.receiveChat()
   }
+
+  componentDidMount() {
+    Backend.loadMessages(message => {
+      this.setState(previousState => {
+        return {
+          messages: GiftedChat.append(previousState.messages, message)
+        };
+      });
+    });
+}
 
   receiveChat = ()=>{
     
