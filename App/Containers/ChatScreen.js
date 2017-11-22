@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList, AsyncStorage, TextInput, Button } from 'react-native'
+import { View, Text, FlatList, AsyncStorage, TextInput, Button, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import MessageBox from '../Components/MessageBox'
 import { ApplicationStyles, Metrics, Colors } from '../Themes'
@@ -38,6 +38,7 @@ class ChatScreen extends React.PureComponent {
   }
 
   componentWillMount(){
+    Backend.setUid(this.state.username)
   }
 
   componentDidMount() {

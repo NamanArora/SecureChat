@@ -3,12 +3,12 @@ import CryptoJS from 'crypto-js';
 
 class Backend {
   uid = "";
+
   messagesRef = null;
   constructor() {
-      this.setUid(1)
   }
   setUid(value) {
-    this.uid = value;
+    this.uid = CryptoJS.AES.encrypt(value,'USERKEY').toString();
   }
   getUid() {
     return this.uid;
