@@ -39,6 +39,8 @@ class ChatScreen extends React.PureComponent {
 
   componentWillMount(){
     Backend.setUid(this.state.username)
+    Backend.setFriend(this.state.friend)
+    Backend.setUser(this.state.username)
   }
 
   componentDidMount() {

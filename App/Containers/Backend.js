@@ -3,9 +3,17 @@ import CryptoJS from 'crypto-js';
 
 class Backend {
   uid = "";
+  friend = ''
+  user = ''
 
   messagesRef = null;
   constructor() {
+  }
+  setFriend(friend){
+    this.friend = friend
+  }
+  setUser(user) {
+    this.user = user
   }
   setUid(value) {
     this.uid = CryptoJS.AES.encrypt(value,'USERKEY').toString();
