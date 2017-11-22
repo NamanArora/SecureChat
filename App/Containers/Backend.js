@@ -16,7 +16,7 @@ class Backend {
     this.user = user
   }
   setUid(value) {
-    this.uid = CryptoJS.AES.encrypt(value,'USERKEY').toString();
+    this.uid = value+'777'
   }
   getUid() {
     return this.uid;
