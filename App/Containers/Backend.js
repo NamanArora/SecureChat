@@ -24,7 +24,8 @@ class Backend {
   // retrieve the messages from the Backend
   loadMessages(callback) {
     console.log("loading messages")
-    this.messagesRef = firebase.database().ref("messages");
+    let merged = (this.friend.charAt(0)> this.user.charAt(0) ? this.user+this.friend : this.friend+this.user)
+    this.messagesRef = firebase.database().ref(merged+"/messages");
     this.messagesRef.off();
     const onReceive = data => {
       const message = data.val();
