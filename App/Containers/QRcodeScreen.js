@@ -4,15 +4,21 @@ import { connect } from 'react-redux'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-
+import store from 'react-native-simple-store';
 // Styles
 import styles from './Styles/QRcodeScreenStyle';
 
 
 class QRcodeScreen extends Component {
 
+  storeName = (name) =>{
+    console.log(name)
+
+  }
+
   onSuccess(e) {
     //Alert.alert(e.data);
+    this.storeName(e.data)
 
 }
   render () {
