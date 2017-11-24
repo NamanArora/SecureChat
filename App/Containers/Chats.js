@@ -28,11 +28,32 @@ class Chats extends Component {
     } catch (e) {
       console.error(e)
     }
-   
+  }
+
+  loadChats = () =>{
+    store.get('chats')
+    .then((names) => {
+      names.forEach((name) => {
+        this.dataObjects.push(name)
+      })
+    })
+  }
+
+  makeDummy = () =>{
+    let names = ['George','Michael','Jennifer','Pilla']
+    names.forEach((name) =>{
+      let obj = {
+        title: name,
+      }
+      store.push('chats',obj)
+    })
+    
   }
 
   componentWillMount(){
     this.load()
+    this.makeDummy()
+    this.loadChats()
   }
 
 
