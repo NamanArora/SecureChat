@@ -13,7 +13,8 @@ class Chats extends Component {
   constructor(props){
     super(props)
     this.state = {
-      username: ''
+      username: '',
+      dataObjects : []
     }
   }
 
@@ -34,9 +35,14 @@ class Chats extends Component {
     store.get('chats')
     .then((names) => {
       console.log(names)
-      names.forEach((name) => {
-        this.dataObjects.push(name)
+      this.setState({
+        dataObjects : names
       })
+      names.forEach((name) => {
+
+        
+      })
+      console.log(this.state.dataObjects)
     })
   }
 
@@ -57,10 +63,14 @@ class Chats extends Component {
     
   }
 
+  componentDidMount(){
+    this.loadChats()
+  }
+
   componentWillMount(){
     this.load()
     //this.makeDummy()
-    this.loadChats()
+    
   }
 
 
@@ -148,7 +158,8 @@ class Chats extends Component {
       <View style={styles.container}>
         <FlatList
           contentContainerStyle={styles.listContent}
-          data={this.dataObjects}
+          data={this.state.dataObjects}
+          extradata={this.state}
           renderItem={this.renderRow.bind(this)}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}
