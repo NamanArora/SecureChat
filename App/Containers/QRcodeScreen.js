@@ -13,19 +13,23 @@ class QRcodeScreen extends Component {
 
   storeName = (name) =>{
     console.log(name)
-
+    let obj = {
+      title: name
+    }
+    store.push('chats', obj)
   }
 
   onSuccess(e) {
     //Alert.alert(e.data);
     this.storeName(e.data)
 
+
 }
   render () {
     return (
       <QRCodeScanner
         onRead={this.onSuccess.bind(this)}
-        reactivate={true}
+        reactivate={false}
         topContent={(
           <View style={styles.fake}>
           </View>

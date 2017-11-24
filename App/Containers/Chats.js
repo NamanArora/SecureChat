@@ -59,8 +59,8 @@ class Chats extends Component {
 
   componentWillMount(){
     this.load()
-    this.makeDummy()
-    
+    //this.makeDummy()
+    this.loadChats()
   }
 
 
