@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList,TouchableOpacity, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
-
+import store from 'react-native-simple-store';
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
 
 // Styles
@@ -28,6 +28,7 @@ class Chats extends Component {
     } catch (e) {
       console.error(e)
     }
+   
   }
 
   componentWillMount(){
@@ -41,11 +42,6 @@ class Chats extends Component {
   * Usually this should come from Redux mapStateToProps
   *************************************************************/
     dataObjects= [
-      {title: 'George', description: 'First Description'},
-      {title: 'Michael', description: 'Second Description'},
-      {title: 'Jennifer', description: 'Third Description'},
-      {title: 'Pilla', description: 'Fourth Description'},
-
     ]
   
 
@@ -64,7 +60,6 @@ class Chats extends Component {
       <TouchableOpacity onPress={this.openChat.bind(this, item.title)}>
       <View style={styles.row}>
         <Text style={styles.boldLabel}>{item.title}</Text>
-        <Text style={styles.label}>{item.description}</Text>
       </View>
       </TouchableOpacity>
     )
