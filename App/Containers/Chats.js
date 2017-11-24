@@ -33,6 +33,7 @@ class Chats extends Component {
   loadChats = () =>{
     store.get('chats')
     .then((names) => {
+      console.log(names)
       names.forEach((name) => {
         this.dataObjects.push(name)
       })
@@ -40,12 +41,18 @@ class Chats extends Component {
   }
 
   makeDummy = () =>{
+    store.delete('chats')
     let names = ['George','Michael','Jennifer','Pilla']
-    names.forEach((name) =>{
-      let obj = {
-        title: name,
-      }
-      store.push('chats',obj)
+    let obj = {
+      title: 'yolo'
+    }
+    let obj2 = {
+      title: 'hello world'
+    }
+    store.push('chats', obj ).then(() =>{
+      store.push('chats', obj2 ).then(() =>{
+        this.loadChats()
+      })
     })
     
   }
@@ -53,7 +60,7 @@ class Chats extends Component {
   componentWillMount(){
     this.load()
     this.makeDummy()
-    this.loadChats()
+    
   }
 
 
@@ -64,9 +71,6 @@ class Chats extends Component {
   *************************************************************/
     dataObjects= [
     ]
-  
-
-
 
   /* ***********************************************************
   * STEP 2
