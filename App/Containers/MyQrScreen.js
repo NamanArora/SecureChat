@@ -37,7 +37,7 @@ class MyQrScreen extends Component {
     try {
       await AsyncStorage.setItem("username", name.toLowerCase())
 
-      this.setState({username: name})
+      this.setState({username: name.toLowerCase()})
     } catch (e) {
       console.error(e)
     }
