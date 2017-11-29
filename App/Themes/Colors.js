@@ -23,7 +23,8 @@ const colors = {
   banner: '#5F3E63',
   text: '#E0D7E5',
   peter: '#3498db',
-  cherry: "#e91e63"
+  cherry: "#e91e63",
+  black : 'black'
 }
 
 export default colors

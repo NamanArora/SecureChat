@@ -5,8 +5,8 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   heading:{
     fontSize: 30,
-    color: '#FFF'
-
+    color: Colors.fire,
+    fontWeight: '400'
   },
   buttons:{
     marginTop: 100,
