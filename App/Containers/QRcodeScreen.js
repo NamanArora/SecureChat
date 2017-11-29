@@ -31,13 +31,16 @@ class QRcodeScreen extends Component {
         onRead={this.onSuccess.bind(this)}
         reactivate={false}
         topContent={(
-          <View style={styles.fake}>
-          </View>
+          <View style={styles.container}>
+          <Text style={styles.centerText}>
+            Scan the QR code of the friend you would like to connect to.
+          </Text>
+            </View>
         )}
         bottomContent={(
           <View style={styles.container}>
           <Text style={styles.centerText}>
-            Scan the QR code you would like to connect to.
+            Close this screen after you feel the vibration.
           </Text>
             </View>
         )}
