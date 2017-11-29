@@ -16,13 +16,13 @@ export const Exist= TabNavigator({
   Chats: { screen: Chats },
 },{
   tabBarOptions: {
-    activeTintColor: Colors.snow,
+    activeTintColor: Colors.fire,
     labelStyle: {
-      fontSize: 12,
+      fontSize: 15,
       fontWeight: 'bold'
     },
     style: {
-      backgroundColor: Colors.peter,
+      backgroundColor: Colors.black,
     },
     tabStyle:{
       borderBottomColor: 'black',
