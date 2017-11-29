@@ -14,7 +14,6 @@ import styles from './Styles/ExistingChatsScreenStyle'
 
 export const Exist= TabNavigator({
   Chats: { screen: Chats },
-  Contacts: { screen: Contacts }
 },{
   tabBarOptions: {
     activeTintColor: Colors.snow,
