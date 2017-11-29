@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 // import YourActions from '../Redux/YourRedux'
 import RoundedButton from '../Components/RoundedButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import Colors from '../Themes/Colors'
 // Styles
 import styles from './Styles/LoginScreenStyle'
 
@@ -31,7 +31,7 @@ class LoginScreen extends Component {
             <View style={styles.logo}>
             <TouchableOpacity style={{ height: 100, width: 100,}} onPress={this._myQR.bind(this)}>
               <View>
-            <Icon name="fingerprint" size={100} color="#FFF" />
+            <Icon name="fingerprint" size={100} color={Colors.fire} />
             </View>
             </TouchableOpacity>
             
