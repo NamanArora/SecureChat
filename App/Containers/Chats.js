@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList,TouchableOpacity, AsyncStorage } from 'react-native'
+import { View, Alert, Text, FlatList,TouchableOpacity, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import store from 'react-native-simple-store';
+
 // More info here: https://facebook.github.io/react-native/docs/flatlist.html
 
 // Styles
@@ -14,7 +15,7 @@ class Chats extends Component {
     super(props)
     this.state = {
       username: '',
-      dataObjects : []
+      dataObjects : [],
     }
   }
 
@@ -46,23 +47,6 @@ class Chats extends Component {
     })
   }
 
-  makeDummy = () =>{
-    store.delete('chats')
-    let names = ['George','Michael','Jennifer','Pilla']
-    let obj = {
-      title: 'yolo'
-    }
-    let obj2 = {
-      title: 'hello world'
-    }
-    store.push('chats', obj ).then(() =>{
-      store.push('chats', obj2 ).then(() =>{
-        this.loadChats()
-      })
-    })
-    
-  }
-
   componentDidMount(){
     this.loadChats()
   }
@@ -90,11 +74,12 @@ class Chats extends Component {
   * e.g.
     return <MyCustomCell title={item.title} description={item.description} />
   *************************************************************/
+    
   renderRow ({item}) {
     return (
       <TouchableOpacity onPress={this.openChat.bind(this, item.title)}>
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>{item.title}</Text>
+        <Text style={styles.boldLabel}>{item.title.toUpperCase()}</Text>
       </View>
       </TouchableOpacity>
     )
