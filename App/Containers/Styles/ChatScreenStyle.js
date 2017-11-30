@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.background
+    backgroundColor: Colors.black
   },
   row: {
     flex: 1,
@@ -20,7 +20,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginBottom: Metrics.smallMargin
   },
-  label: {
+  label:{
     textAlign: 'center',
     color: Colors.snow
   },

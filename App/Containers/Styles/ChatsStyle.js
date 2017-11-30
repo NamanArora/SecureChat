@@ -11,16 +11,16 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
     marginVertical: 0,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
+    alignItems: 'center',
     justifyContent: 'center'
   },
   boldLabel: {
     fontWeight: 'bold',
-    alignSelf: 'flex-start',
+    alignItems: 'center',
     color: Colors.snow,
     textAlign: 'left',
-    marginBottom: Metrics.smallMargin
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
   label: {
     textAlign: 'left',
