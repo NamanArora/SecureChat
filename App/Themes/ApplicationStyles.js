@@ -28,6 +28,11 @@ const ApplicationStyles = {
       bottom: 0,
       right: 0
     },
+    redcontainer: {
+      flex: 1,
+      paddingTop: Metrics.baseMargin,
+      backgroundColor: Colors.fire
+    },
     container: {
       flex: 1,
       paddingTop: Metrics.baseMargin,

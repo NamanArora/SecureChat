@@ -3,7 +3,7 @@ import { ScrollView, Text, KeyboardAvoidingView, TextInput, View, Button, Consol
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import QRCode from 'react-native-qrcode-svg';
+import QRCode from 'react-native-qrcode';
 // Styles
 import styles from './Styles/MyQrScreenStyle'
 
@@ -52,7 +52,7 @@ class MyQrScreen extends Component {
   render () {
   
     return (
-      <View style={styles.container}>
+      <View style={styles.redcontainer}>
         <KeyboardAvoidingView behavior='position'>
           <View style={styles.centerView}>
             <View style={{marginTop: 50}}>
