@@ -60,7 +60,7 @@ class MyQrScreen extends Component {
           <TextInput autoCapitalize='none' editable={this.state.username === ''? true: false} value={this.state.text !== ''? this.state.text: ''} width={300} placeholderTextColor={'white'} multiline={false} style={{color:'white'}} placeholder="Enter your username" onChangeText={(text1) => {this.setState({text: text1})}} />
           {this.state.username === '' ? <Button title="Save" onPress={this._generateQR.bind(this)} />: <View />}
           </View>
-          {this.state.text!== '' ? <View style={{marginTop: 0}}><QRCode size={300} value={this.state.text} /></View>: <View /> }
+          {this.state.text!== '' ? <View style={{marginTop: 0}}><QRCode size={300} value={this.state.text.toLowerCase()} /></View>: <View /> }
           </View>
 
         </KeyboardAvoidingView>
